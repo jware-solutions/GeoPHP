@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  php:
+    build:
+      context: .
+    image: custom-php
+    volumes:
+      - ./:/home/devuser/geophp/
+    

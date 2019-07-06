@@ -1,0 +1,22 @@
+{
+    "name": "genarito/geophp",
+    "description": "A little geo spacal library for PHP based on Geo Rust",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Genaro Camele",
+            "email": "genarocamele@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.3@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Genarito\\GeoPHP\\": "src/"
+        }
+    }
+}
