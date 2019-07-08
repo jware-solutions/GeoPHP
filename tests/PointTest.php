@@ -55,7 +55,20 @@ class PointTest extends \PHPUnit\Framework\TestCase {
      * Test conversion from degrees to radians
      */
     public function fromDegreesToRadians() {
-        // Todo
+        $point1 = new Point(57.29578, 0);
+        $point2 = new Point(114.5916, 171.8873);
+        $point1Converted = $point1->fromDegreesToRadians();
+        $point2Converted = $point2->fromDegreesToRadians();
+
+        // Converted instances are also Points
+        $this->assertInstanceOf('\Genarito\GeoPHP\Point', $point1Converted);
+        $this->assertInstanceOf('\Genarito\GeoPHP\Point', $point2Converted);
+
+        // Checks converted values
+        $this->assertEquals(1, $point1Converted->getX());
+        $this->assertEquals(0, $point1Converted->getY());
+        $this->assertEquals(2, $point2Converted->getX());
+        $this->assertEquals(3, $point2Converted->getY());
     }
 
     /**
@@ -91,6 +104,17 @@ class PointTest extends \PHPUnit\Framework\TestCase {
 
         $cross = $pointA->crossProduct($pointB, $pointC);
         $this->assertEquals(2.0, $cross);
+    }
+
+    /**
+     * Tests the euclidean distance between two points
+     */
+    public function testEuclideanDistance() {
+        $point1 = new Point(1, 2);
+        $this->assertEquals(4.243, round($point1->euclideanDistance(new Point(4, 5)), $precision=3),);
+        
+        $point2 = new Point(1, 4);
+        $this->assertEquals(1.414, round($point2->euclideanDistance(new Point(2, 5)), $precision=3),);
     }
 }
 

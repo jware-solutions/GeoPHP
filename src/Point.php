@@ -132,6 +132,18 @@ class Point {
         return ($point2->getX() - $this->x) * ($point3->getY() - $this->y)
             - ($point2->getY() - $this->y) * ($point3->getX() - $this->x);
     }
+
+    /**
+     * Computes the euclidean distance between two points
+     * @param Point $otherPoint Other point to compute the euclidean distance
+     * @return float|double Euclidean distance between the two points
+     */
+    public function euclideanDistance(Point $otherPoint) {
+        return sqrt(
+            (($otherPoint->getX() - $this->x) ** 2)
+            + (($otherPoint->getY() - $this->y) ** 2)
+        );
+    }
 }
 
 
