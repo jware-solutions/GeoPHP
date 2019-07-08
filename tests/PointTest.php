@@ -7,6 +7,11 @@ class PointTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf('\Genarito\GeoPHP\Point', new Point());
     }
 
+    public function testGetXandY() {
+        $point = new Point(3, 4);
+        $this->assertEquals([3, 4], $point->getXandY());
+    }
+
     /**
      * Tests whether two points are the same
      */

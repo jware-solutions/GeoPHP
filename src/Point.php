@@ -57,6 +57,14 @@ class Point {
     }
 
     /**
+     * Getter for x and y
+     * @return float|double[] Array with two values: X (0) and Y (1)
+     */
+    public function getXAndY() {
+        return [$this->x, $this->y];
+    }
+
+    /**
      * Checks whether two points are equals
      * (i.e. have the same coordinates)
      * @param Point $otherPoint The second point to compare
