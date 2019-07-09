@@ -1,6 +1,7 @@
 <?php
 
 use \Genarito\GeoPHP\Point;
+use \Genarito\GeoPHP\Line;
 
 class PointTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfPoint() {
@@ -120,6 +121,26 @@ class PointTest extends \PHPUnit\Framework\TestCase {
         
         $point2 = new Point(1, 4);
         $this->assertEquals(1.414, round($point2->euclideanDistance(new Point(2, 5)), $precision=3),);
+    }
+
+    /**
+     * Test intersection method
+     */
+    public function testIntersects() {
+        $line1 = new Line(
+            new Point(1, 1),
+            new Point(5, 5)
+        );
+
+        $point1 = new Point(3, 3);
+        $point2 = new Point(3, 3);
+        $point3 = new Point(3, 4);
+
+        $this->assertTrue($point1->intersects($point2));
+        $this->assertTrue($point2->intersects($point1));
+        $this->assertTrue($point1->intersects($line1));
+        $this->assertFalse($point1->intersects($point3));
+        $this->assertFalse($point3->intersects($line1));
     }
 }
 

@@ -88,7 +88,7 @@ class LineTest extends \PHPUnit\Framework\TestCase {
             new Point(3.45, 11.3)
         );
 
-        $line4 =  new Line(
+        $line4 = new Line(
             new Point(2, 34),
             new Point(2, 11)
         );
@@ -99,6 +99,33 @@ class LineTest extends \PHPUnit\Framework\TestCase {
         // NOTE: Line(a, b).slope() == Line(b, a).slope()
         $this->assertEquals($line2->slope(), $line3->slope());
         $this->assertEquals(INF, $line4->slope());
+    }
+
+    /**
+     * Test intersection method
+     */
+    public function testIntersects() {
+        $line1 = new Line(
+            new Point(1, 1),
+            new Point(5, 5)
+        );
+
+        $line2 = new Line(
+            new Point(3, 3),
+            new Point(5, 1)
+        );
+
+        $line3 = new Line(
+            new Point(-1, 1),
+            new Point(-5, -10)
+        );
+
+        $this->assertTrue($line1->intersects($line2));
+        $this->assertTrue($line2->intersects($line1));
+        $this->assertTrue($line1->intersects($line1));
+        $this->assertFalse($line1->intersects($line3));
+        $this->assertFalse($line2->intersects($line3));
+        $this->assertFalse($line3->intersects($line2));
     }
 }
 

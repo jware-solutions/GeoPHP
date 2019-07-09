@@ -2,10 +2,13 @@
 
 namespace Genarito\GeoPHP;
 
+use \Genarito\GeoPHP\Geometry;
+use \Genarito\GeoPHP\Line;
+
 /**
  * Represents a single point in 2D space.
  */
-class Point {
+class Point implements Geometry {
     private $x;
     private $y;
 
@@ -151,6 +154,27 @@ class Point {
             (($otherPoint->getX() - $this->x) ** 2)
             + (($otherPoint->getY() - $this->y) ** 2)
         );
+    }
+
+    /**
+     * Abstract method implementation
+     */
+    public function intersects(Geometry $otherGeometry) {
+        $class = get_class($otherGeometry);
+        switch ($class) {
+            case Point::class:
+                $intersects = $this->isEqual($otherGeometry);
+                break;
+            case Line::class:
+                // Uses double dispatching
+                $intersects = $otherGeometry->intersectsPoint($this);
+                break;
+            default:
+                throw new Exception("Not valid geometry", 1);
+                break;
+        }
+
+        return $intersects;
     }
 }
 
