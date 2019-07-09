@@ -7,11 +7,13 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfPolygon() {
         $somePoint = new Point(0, 0);
         $otherPoint = new Point(1, 0);
+        $otherPoint2 = new Point(1, 1);
         
         // Checks correct instance
 		$this->assertInstanceOf('\Genarito\GeoPHP\Polygon', new Polygon([
             $somePoint,
             $otherPoint,
+            $otherPoint2,
             $somePoint
         ]));
 
@@ -20,7 +22,15 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
         $invalidPolygon = new Polygon([
             new Point(0, 1),
             new Point(3, 1),
+            new Point(4, 2),
             new Point(1, 1) // Not equals to first point
+        ]);
+
+        // Has only 2 different points
+        $invalidPolygon2 = new Polygon([
+            new Point(0, 1),
+            new Point(3, 1),
+            new Point(1, 1) 
         ]);
     }
 

@@ -46,7 +46,15 @@ class Polygon implements Geometry {
      * @return Polygon Current instance
      */
     public function setPoints(array $points): Polygon {
-        $lastPosition = count($points) - 1;
+        // A polygon has at least three points
+        $pointsCount = count($points);
+        // '< 4' because the last point has to be the same as first point
+        if ($pointsCount < 4) { 
+            throw new \Exception("The polygon has to have at least three diferent points", 1);
+        }
+
+        // Checks first/last equality
+        $lastPosition = $pointsCount - 1;
         if (!$points[0]->isEqual($points[$lastPosition])) {
             throw new \Exception("First and last point must have the same values", 1);
         }
@@ -59,7 +67,7 @@ class Polygon implements Geometry {
      * Computes the polygon's centroid
      * @return Point Polygon's centroid point
      */
-    private function findCentroid() {
+    private function findCentroid(): Point {
         $x = 0.0;
         $y = 0.0;
         foreach ($this->points as $point) {
@@ -78,7 +86,7 @@ class Polygon implements Geometry {
      * Sorts the polygon's vertices in clockwise order
      * @return Point[] Array with the sorted vertices
      */
-    private function getSortedVerticies() {
+    private function getSortedVerticies(): array {
         // Gets polygon centroid
         $center = $this->findCentroid();
         $subArray = array_slice($this->points, 0, count($this->points) - 1);
