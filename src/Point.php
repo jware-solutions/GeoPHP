@@ -159,7 +159,14 @@ class Point implements Geometry {
     /**
      * Abstract method implementation
      */
-    public function intersects(Geometry $otherGeometry) {
+    public function area() {
+        return 0;
+    }
+
+    /**
+     * Abstract method implementation
+     */
+    public function intersects(Geometry $otherGeometry): bool {
         $class = get_class($otherGeometry);
         switch ($class) {
             case Point::class:
