@@ -5,7 +5,7 @@ use \Genarito\GeoPHP\Line;
 
 class PointTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfPoint() {
-		$this->assertInstanceOf('\Genarito\GeoPHP\Point', new Point());
+		$this->assertInstanceOf('\Genarito\GeoPHP\Point', new Point(0, 0));
     }
 
     public function testGetXandY() {

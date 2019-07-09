@@ -18,7 +18,7 @@ class Point implements Geometry {
      * @param float|double $y Value for y
      * @return Point New instance
      */
-    public function __construct($x = 0, $y = 0) {
+    public function __construct($x, $y) {
         $this->x = $x;
         $this->y = $y;
     }

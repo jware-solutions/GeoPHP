@@ -6,8 +6,8 @@ use \Genarito\GeoPHP\Point;
 class LineTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfLine() {
 		$this->assertInstanceOf('\Genarito\GeoPHP\Line', new Line(
-            new Point(),
-            new Point()
+            new Point(0, 0),
+            new Point(1, 1)
         ));
     }
 
