@@ -183,7 +183,7 @@ class Line implements Geometry {
                 $intersects = $this->intersectLine($otherGeometry);
                 break;
             default:
-                throw new Exception("Not valid geometry", 1);
+                throw new \Exception("Not valid geometry", 1);
                 break;
         }
 
