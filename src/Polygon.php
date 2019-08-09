@@ -1,9 +1,10 @@
 <?php
 
-namespace Genarito\GeoPHP;
+namespace JWare\GeoPHP;
 
-use \Genarito\GeoPHP\Geometry;
-use \Genarito\GeoPHP\Line;
+use \JWare\GeoPHP\Geometry;
+use \JWare\GeoPHP\Point;
+use \JWare\GeoPHP\Line;
 
 /**
  * Represents a single point in 2D space.
@@ -125,6 +126,10 @@ class Polygon implements Geometry {
         return abs($area / 2.0);
     }
 
+    public function intersectsLine(Line $line) {
+        return false;
+    }
+
     /**
      * Abstract method implementation
      */
@@ -134,7 +139,7 @@ class Polygon implements Geometry {
             case Point::class:
                 break;
             case Line::class:
-                // Uses double dispatching
+                $intersects = $this->intersectsLine($otherGeometry);
                 break;
             default:
                 throw new \Exception("Not valid geometry", 1);

@@ -1,9 +1,9 @@
 <?php
 
-namespace Genarito\GeoPHP;
+namespace JWare\GeoPHP;
 
-use \Genarito\GeoPHP\Geometry;
-use \Genarito\GeoPHP\Line;
+use \JWare\GeoPHP\Geometry;
+use \JWare\GeoPHP\Line;
 
 /**
  * Represents a single point in 2D space.

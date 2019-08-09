@@ -1,5 +1,5 @@
 {
-    "name": "genarito/geophp",
+    "name": "jware/geophp",
     "description": "A little geo spacal library for PHP based on Geo Rust",
     "type": "library",
     "license": "MIT",
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Genarito\\GeoPHP\\": "src/"
+            "JWare\\GeoPHP\\": "src/"
         }
     }
 }

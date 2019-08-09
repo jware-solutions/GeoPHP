@@ -1,6 +1,6 @@
 <?php
 
-namespace Genarito\GeoPHP;
+namespace JWare\GeoPHP;
 
 interface Geometry {
     /**

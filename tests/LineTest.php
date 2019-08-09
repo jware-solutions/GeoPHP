@@ -1,11 +1,11 @@
 <?php
 
-use \Genarito\GeoPHP\Line;
-use \Genarito\GeoPHP\Point;
+use \JWare\GeoPHP\Line;
+use \JWare\GeoPHP\Point;
 
 class LineTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfLine() {
-		$this->assertInstanceOf('\Genarito\GeoPHP\Line', new Line(
+		$this->assertInstanceOf('\JWare\GeoPHP\Line', new Line(
             new Point(0, 0),
             new Point(1, 1)
         ));

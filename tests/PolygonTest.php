@@ -1,7 +1,7 @@
 <?php
 
-use \Genarito\GeoPHP\Polygon;
-use \Genarito\GeoPHP\Point;
+use \JWare\GeoPHP\Polygon;
+use \JWare\GeoPHP\Point;
 
 class PolygonTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfPolygon() {
@@ -10,7 +10,7 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
         $otherPoint2 = new Point(1, 1);
         
         // Checks correct instance
-		$this->assertInstanceOf('\Genarito\GeoPHP\Polygon', new Polygon([
+		$this->assertInstanceOf('\JWare\GeoPHP\Polygon', new Polygon([
             $somePoint,
             $otherPoint,
             $otherPoint2,

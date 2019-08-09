@@ -1,9 +1,9 @@
 <?php
 
-namespace Genarito\GeoPHP;
+namespace JWare\GeoPHP;
 
-use \Genarito\GeoPHP\Geometry;
-use \Genarito\GeoPHP\Point;
+use \JWare\GeoPHP\Geometry;
+use \JWare\GeoPHP\Point;
 
 /**
  * Represents a line segment made up of exactly two Points.

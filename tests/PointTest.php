@@ -1,11 +1,11 @@
 <?php
 
-use \Genarito\GeoPHP\Point;
-use \Genarito\GeoPHP\Line;
+use \JWare\GeoPHP\Point;
+use \JWare\GeoPHP\Line;
 
 class PointTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfPoint() {
-		$this->assertInstanceOf('\Genarito\GeoPHP\Point', new Point(0, 0));
+		$this->assertInstanceOf('\JWare\GeoPHP\Point', new Point(0, 0));
     }
 
     public function testGetXandY() {
@@ -47,8 +47,8 @@ class PointTest extends \PHPUnit\Framework\TestCase {
         $point2Converted = $point2->fromRadiansToDegrees();
 
         // Converted instances are also Points
-        $this->assertInstanceOf('\Genarito\GeoPHP\Point', $point1Converted);
-        $this->assertInstanceOf('\Genarito\GeoPHP\Point', $point2Converted);
+        $this->assertInstanceOf('\JWare\GeoPHP\Point', $point1Converted);
+        $this->assertInstanceOf('\JWare\GeoPHP\Point', $point2Converted);
 
         // Checks converted values
         $this->assertEquals(57.29578, $point1Converted->getX());
@@ -67,8 +67,8 @@ class PointTest extends \PHPUnit\Framework\TestCase {
         $point2Converted = $point2->fromDegreesToRadians();
 
         // Converted instances are also Points
-        $this->assertInstanceOf('\Genarito\GeoPHP\Point', $point1Converted);
-        $this->assertInstanceOf('\Genarito\GeoPHP\Point', $point2Converted);
+        $this->assertInstanceOf('\JWare\GeoPHP\Point', $point1Converted);
+        $this->assertInstanceOf('\JWare\GeoPHP\Point', $point2Converted);
 
         // Checks converted values
         $this->assertEquals(1, $point1Converted->getX());
