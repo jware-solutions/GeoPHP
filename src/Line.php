@@ -131,7 +131,7 @@ class Line implements Geometry {
      * @param Line $line Line to check
      * @return True if the line intersects with the point, false otherwise
      */
-    public function intersectLine(Line $line) {
+    public function intersectsLine(Line $line) {
         // Using Cramer's Rule:
         // https://en.wikipedia.org/wiki/Intersection_%28Euclidean_geometry%29#Two_line_segments
         $a1 = $this->dx();
@@ -144,18 +144,18 @@ class Line implements Geometry {
         $d = $a1 * $b2 - $a2 * $b1;
         if (!$d) {
             $thisPoints = $this->points();
-            $selfStart = $thisPoints[0];
-            $selfEnd = $thisPoints[1];
+            $selfStartPoint = $thisPoints[0];
+            $selfEndPoint = $thisPoints[1];
             $otherPoints = $line->points();
-            $otherStart = $otherPoints[0];
-            $otherEnd = $otherPoints[1];
+            $otherStartPoint = $otherPoints[0];
+            $otherEndPoint = $otherPoints[1];
 
             // Lines are parallel
             // Return true if at least one end point intersects the other line
-            return $selfStart->intersects($line)
-                || $selfEnd->intersects($line)
-                || $otherStart->intersects($this)
-                || $otherEnd->intersects($this);
+            return $selfStartPoint->intersectsLine($line)
+                || $selfEndPoint->intersectsLine($line)
+                || $otherStartPoint->intersectsLine($this)
+                || $otherEndPoint->intersectsLine($this);
         }
 
         $s = ($c1 * $b2 - $c2 * $b1) / $d;
@@ -168,25 +168,5 @@ class Line implements Geometry {
      */
     public function area() {
         return 0;
-    }
-
-    /**
-     * Abstract method implementation
-     */
-    public function intersects(Geometry $otherGeometry): bool {
-        $class = get_class($otherGeometry);
-        switch ($class) {
-            case Point::class:
-                $intersects = $this->intersectsPoint($otherGeometry);
-                break;
-            case Line::class:
-                $intersects = $this->intersectLine($otherGeometry);
-                break;
-            default:
-                throw new \Exception("Not valid geometry", 1);
-                break;
-        }
-
-        return $intersects;
     }
 }

@@ -120,12 +120,12 @@ class LineTest extends \PHPUnit\Framework\TestCase {
             new Point(-5, -10)
         );
 
-        $this->assertTrue($line1->intersects($line2));
-        $this->assertTrue($line2->intersects($line1));
-        $this->assertTrue($line1->intersects($line1));
-        $this->assertFalse($line1->intersects($line3));
-        $this->assertFalse($line2->intersects($line3));
-        $this->assertFalse($line3->intersects($line2));
+        $this->assertTrue($line1->intersectsLine($line2));
+        $this->assertTrue($line2->intersectsLine($line1));
+        $this->assertTrue($line1->intersectsLine($line1));
+        $this->assertFalse($line1->intersectsLine($line3));
+        $this->assertFalse($line2->intersectsLine($line3));
+        $this->assertFalse($line3->intersectsLine($line2));
     }
 }
 

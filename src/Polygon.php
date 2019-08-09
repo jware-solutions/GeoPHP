@@ -26,7 +26,7 @@ class Polygon implements Geometry {
      * Getter of the points of the polygon
      * @return Point[] Array of points that make up the polygon
      */
-    public function getPoint(): array {
+    public function getPoints(): array {
         return $this->points;
     }
 
@@ -128,24 +128,5 @@ class Polygon implements Geometry {
 
     public function intersectsLine(Line $line) {
         return false;
-    }
-
-    /**
-     * Abstract method implementation
-     */
-    public function intersects(Geometry $otherGeometry): bool {
-        $class = get_class($otherGeometry);
-        switch ($class) {
-            case Point::class:
-                break;
-            case Line::class:
-                $intersects = $this->intersectsLine($otherGeometry);
-                break;
-            default:
-                throw new \Exception("Not valid geometry", 1);
-                break;
-        }
-
-        return $intersects;
     }
 }

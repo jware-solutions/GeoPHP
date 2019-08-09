@@ -164,24 +164,21 @@ class Point implements Geometry {
     }
 
     /**
-     * Abstract method implementation
+     * Checks whether the point intersects a line
+     * @param Line $line Line to check
+     * @return True if the point intersects with the line, false otherwise
      */
-    public function intersects(Geometry $otherGeometry): bool {
-        $class = get_class($otherGeometry);
-        switch ($class) {
-            case Point::class:
-                $intersects = $this->isEqual($otherGeometry);
-                break;
-            case Line::class:
-                // Uses double dispatching
-                $intersects = $otherGeometry->intersectsPoint($this);
-                break;
-            default:
-                throw new \Exception("Not valid geometry", 1);
-                break;
-        }
+    public function intersectsLine(Line $line): bool {
+        return $line->intersectsPoint($this);
+    }
 
-        return $intersects;
+    /**
+     * Checks whether the point intersects with another point
+     * @param Point $point Point to check
+     * @return True if the point intersects with the other point, false otherwise
+     */
+    public function intersectsPoint(Point $point): bool {
+        return $this->isEqual($point);
     }
 }
 
