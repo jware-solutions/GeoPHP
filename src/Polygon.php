@@ -126,7 +126,108 @@ class Polygon implements Geometry {
         return abs($area / 2.0);
     }
 
+    /**
+     * TODO: hacer!!
+     */
     public function intersectsLine(Line $line) {
         return false;
+    }
+
+    /**
+     * To find orientation of ordered triplet (p, q, r). 
+     * The function returns following values 
+     * @return int 0 --> p, q and r are colinear, 1 --> Clockwise, 2 --> Counterclockwise 
+     */
+    private function orientation($p, $q, $r) { 
+        $val = ($q->getY() - $p->getY()) * ($r->getX() - $q->getX()) - ($q->getX() - $p->getX()) * ($r->getY() - $q->getY()); 
+        if ($val == 0) return 0; // colinear 
+        return ($val > 0) ? 1 : 2; // clock or counterclock wise 
+    }
+
+    /**
+     * Given three colinear points p, q, r, the function checks if $q lies on line segment 'pr'
+     * @param Point $p Point 1
+     * @param Point $q Point 2
+     * @param Point $r Point 3
+     * @return bool True if if $q lies on line segment 'pr', false otherwise
+     */
+    private function onSegment(Point $p, Point $q, Point $r) { 
+        return ($q->getX() <= max($p->getX(), $r->getX()) && $q->getX() >= min($p->getX(), $r->getX())
+            && $q->getY() <= max($p->getY(), $r->getY()) && $q->getY() >= min($p->getY(), $r->getY()));
+    } 
+
+    /**
+     * Checks if line segment 'p1q1' and 'p2q2' intersect
+     * @param Point $p1 Line 1 segment point start
+     * @param Point $q1 Line 1 segment point end
+     * @param Point $p2 Line 2 segment point start
+     * @param Point $q2 Line 2 segment point end
+     * @return bool True if intersects, false otherwise
+     */
+    private function doIntersect(Point $p1, Point $q1, Point $p2, Point $q2) { 
+        // Find the four orientations needed for general and 
+        // special cases 
+        $o1 = $this->orientation($p1, $q1, $p2);
+        $o2 = $this->orientation($p1, $q1, $q2);
+        $o3 = $this->orientation($p2, $q2, $p1);
+        $o4 = $this->orientation($p2, $q2, $q1);
+
+        // General case 
+        if ($o1 != $o2 && $o3 != $o4) {
+            return true; 
+        }
+    
+        // Special Cases
+        // p1, q1 and p2 are colinear and p2 lies on segment p1q1 
+        if ($o1 == 0 && $this->onSegment($p1, $p2, $q1)) return true; 
+    
+        // p1, q1 and p2 are colinear and q2 lies on segment p1q1 
+        if ($o2 == 0 && $this->onSegment($p1, $q2, $q1)) return true; 
+    
+        // p2, q2 and p1 are colinear and p1 lies on segment p2q2 
+        if ($o3 == 0 && $this->onSegment($p2, $p1, $q2)) return true; 
+    
+        // p2, q2 and q1 are colinear and q1 lies on segment p2q2 
+        if ($o4 == 0 && $this->onSegment($p2, $q1, $q2)) return true; 
+    
+        return false; // Doesn't fall in any of the above cases 
+    }
+
+    /**
+     * Checks if a point is inside a polygon
+     * @param Point $point Point to check
+     * @return bool True if the point is inside the polygon, false otherwise
+     */
+    public function pointIsWithin(Point $point) {
+        // $this->isInside($poligono, sizeof($poligono), $punto);
+        $n = sizeof($this->points);
+        $points = $this->points;
+
+        // Create a $for line segment from p to infinite 
+        $extremePoint = new Point(10000, $point->getY());
+    
+        // Count intersections of the above line with sides of polygon 
+        $count = 0; $i = 0; 
+        do
+        { 
+            $next = ($i + 1) % $n; 
+    
+            // Check if the line segment from 'p' to 'extreme' intersects 
+            // with the line segment from 'polygon[i]' to 'polygon[next]' 
+            if ($this->doIntersect($points[$i], $points[$next], $point, $extremePoint)) { 
+                // If the $'p' is colinear with line segment 'i-next', 
+                // then check if it lies on segment. If it lies, return true, 
+                // otherwise false 
+                if ($this->orientation($points[$i], $point, $points[$next]) == 0){
+                    return $this->onSegment($points[$i], $point, $points[$next]); 
+                }
+    
+                $count++; 
+            } 
+            $i = $next; 
+        } while ($i != 0); 
+    
+        // Return true if count is odd, false otherwise 
+        return $count % 2 == 1;
     }
 }

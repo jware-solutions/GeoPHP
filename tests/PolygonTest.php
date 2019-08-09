@@ -56,4 +56,24 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(16, $polygon1->area());
         $this->assertEquals(8, $polygon2->area());
     }
+
+    /**
+     * Test if point is within a polygon
+     */
+    public function testPointIsWithin() {
+        $polygon1 = new Polygon([
+            new Point(0, 0),
+            new Point(4, 0),
+            new Point(4, 4),
+            new Point(0, 4),
+            new Point(0, 0),
+        ]);
+
+        $this->assertTrue($polygon1->pointIsWithin(new Point(2, 2)));
+        $this->assertTrue($polygon1->pointIsWithin(new Point(4, 4)));
+        $this->assertTrue($polygon1->pointIsWithin(new Point(0, 2)));
+        $this->assertFalse($polygon1->pointIsWithin(new Point(10, 12)));
+        $this->assertFalse($polygon1->pointIsWithin(new Point(-1, 2)));
+        $this->assertFalse($polygon1->pointIsWithin(new Point(5, -2)));
+    }
 }

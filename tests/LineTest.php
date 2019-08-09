@@ -120,12 +120,23 @@ class LineTest extends \PHPUnit\Framework\TestCase {
             new Point(-5, -10)
         );
 
+        $point1 = new Point(3, 3);
+        $point2 = new Point(-1, 1);
+        $point3 = new Point(-5, -10);
+
         $this->assertTrue($line1->intersectsLine($line2));
         $this->assertTrue($line2->intersectsLine($line1));
         $this->assertTrue($line1->intersectsLine($line1));
         $this->assertFalse($line1->intersectsLine($line3));
         $this->assertFalse($line2->intersectsLine($line3));
         $this->assertFalse($line3->intersectsLine($line2));
+        $this->assertTrue($line1->intersectsPoint($point1));
+        $this->assertTrue($line2->intersectsPoint($point1));
+        $this->assertFalse($line3->intersectsPoint($point1));
+        $this->assertTrue($line3->intersectsPoint($point2));
+        $this->assertTrue($line3->intersectsPoint($point3));
+
+        // TODO: itersects polygon
     }
 }
 
