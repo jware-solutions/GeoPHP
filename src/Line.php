@@ -164,6 +164,15 @@ class Line implements Geometry {
     }
 
     /**
+     * Checks whether the line intersects a polygon
+     * @param Polygon $polygon Polygon to check
+     * @return True if the line intersects with the polygon, false otherwise
+     */
+    public function intersectsPolygon(Polygon $polygon) {
+        return $polygon->intersectsLine($this);
+    }
+
+    /**
      * Abstract method implementation
      */
     public function area() {

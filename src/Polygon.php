@@ -127,9 +127,26 @@ class Polygon implements Geometry {
     }
 
     /**
-     * TODO: hacer!!
+     * Checks whether the polygon intersects a line
+     * @param Line $line Line to check
+     * @return True if the polygon intersects with the line, false otherwise
      */
     public function intersectsLine(Line $line) {
+        $n = sizeof($this->points);
+        $polygonPoints = $this->points;
+
+        $i = 0;
+        do {
+            $next = ($i + 1) % $n; 
+    
+            // Check if the line segment from 'p' to 'extreme' intersects 
+            // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
+            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
+            if ($line->intersectsLine($lineIToNext)) {
+                return true;
+            } 
+            $i = $next; 
+        } while ($i != 0); 
         return false;
     }
 

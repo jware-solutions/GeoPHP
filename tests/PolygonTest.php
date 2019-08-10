@@ -76,4 +76,6 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($polygon1->pointIsWithin(new Point(-1, 2)));
         $this->assertFalse($polygon1->pointIsWithin(new Point(5, -2)));
     }
+
+    // TODO: intersection!!
 }

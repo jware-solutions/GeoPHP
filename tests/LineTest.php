@@ -2,6 +2,7 @@
 
 use \JWare\GeoPHP\Line;
 use \JWare\GeoPHP\Point;
+use \JWare\GeoPHP\Polygon;
 
 class LineTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfLine() {
@@ -105,6 +106,7 @@ class LineTest extends \PHPUnit\Framework\TestCase {
      * Test intersection method
      */
     public function testIntersects() {
+        // Lines
         $line1 = new Line(
             new Point(1, 1),
             new Point(5, 5)
@@ -120,23 +122,50 @@ class LineTest extends \PHPUnit\Framework\TestCase {
             new Point(-5, -10)
         );
 
+        // Points
         $point1 = new Point(3, 3);
         $point2 = new Point(-1, 1);
         $point3 = new Point(-5, -10);
 
-        $this->assertTrue($line1->intersectsLine($line2));
-        $this->assertTrue($line2->intersectsLine($line1));
-        $this->assertTrue($line1->intersectsLine($line1));
-        $this->assertFalse($line1->intersectsLine($line3));
-        $this->assertFalse($line2->intersectsLine($line3));
-        $this->assertFalse($line3->intersectsLine($line2));
+        // Polygons
+        $polygon1 = new Polygon([
+            new Point(2, 4),
+            new Point(4, 4),
+            new Point(4, 2),
+            new Point(3, 1),
+            new Point(2.5, 3),
+            new Point(2, 4)
+        ]);
+
+        $polygon2 = new Polygon([
+            new Point(-3, -4),
+            new Point(-1, -5),
+            new Point(-2, -6),
+            new Point(-3, -4)
+        ]);
+
+        // With Point
         $this->assertTrue($line1->intersectsPoint($point1));
         $this->assertTrue($line2->intersectsPoint($point1));
         $this->assertFalse($line3->intersectsPoint($point1));
         $this->assertTrue($line3->intersectsPoint($point2));
         $this->assertTrue($line3->intersectsPoint($point3));
 
-        // TODO: itersects polygon
+        // With Line
+        $this->assertTrue($line1->intersectsLine($line2));
+        $this->assertTrue($line2->intersectsLine($line1));
+        $this->assertTrue($line1->intersectsLine($line1));
+        $this->assertFalse($line1->intersectsLine($line3));
+        $this->assertFalse($line2->intersectsLine($line3));
+        $this->assertFalse($line3->intersectsLine($line2));
+
+        // With polygon
+        $this->assertTrue($line1->intersectsPolygon($polygon1));
+        $this->assertTrue($line2->intersectsPolygon($polygon1));
+        $this->assertTrue($line3->intersectsPolygon($polygon2));
+        $this->assertFalse($line1->intersectsPolygon($polygon2));
+        $this->assertFalse($line2->intersectsPolygon($polygon2));
+        $this->assertFalse($line3->intersectsPolygon($polygon1));
     }
 }
 
