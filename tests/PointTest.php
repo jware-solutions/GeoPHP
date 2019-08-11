@@ -135,11 +135,16 @@ class PointTest extends \PHPUnit\Framework\TestCase {
         $point1 = new Point(3, 3);
         $point2 = new Point(3, 3);
         $point3 = new Point(3, 4);
+        $point4 = new Point(5, 5);
 
+        // With Point
         $this->assertTrue($point1->intersectsPoint($point2));
         $this->assertTrue($point2->intersectsPoint($point1));
         $this->assertFalse($point1->intersectsPoint($point3));
+
+        // With Line
         $this->assertTrue($point1->intersectsLine($line1));
+        $this->assertTrue($point4->intersectsLine($line1)); // Extreme
         $this->assertFalse($point3->intersectsLine($line1));
     }
 }

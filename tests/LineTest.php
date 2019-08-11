@@ -159,7 +159,7 @@ class LineTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($line2->intersectsLine($line3));
         $this->assertFalse($line3->intersectsLine($line2));
 
-        // With polygon
+        // With Polygon
         $this->assertTrue($line1->intersectsPolygon($polygon1));
         $this->assertTrue($line2->intersectsPolygon($polygon1));
         $this->assertTrue($line3->intersectsPolygon($polygon2));
