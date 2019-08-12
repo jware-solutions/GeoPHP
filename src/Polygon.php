@@ -193,7 +193,7 @@ class Polygon implements Geometry {
      * @param Point $point Point to check
      * @return bool True if the point is inside the polygon, false otherwise
      */
-    public function pointIsWithin(Point $point): bool {
+    public function containsPoint(Point $point): bool {
         $n = sizeof($this->points);
         $polygonPoints = $this->points;
 
@@ -224,5 +224,41 @@ class Polygon implements Geometry {
     
         // Return true if count is odd, false otherwise 
         return $count % 2 == 1;
+    }
+
+    /**
+     * Checks if the polygon contains a line
+     * @param Line $line Line to check
+     * @return bool True if the line is inside the polygon, false otherwise
+     */
+    public function containsLine(Line $line): bool {
+        return $this->containsPoint($line->getStart())
+            && $this->containsPoint($line->getEnd())
+            && !$this->intersectsLine($line);
+    }
+
+    /**
+     * Checks if the polygon contains another polygon
+     * @param Polygon $polygon Polygon to check
+     * @return bool True if the Polygon is inside the polygon, false otherwise
+     */
+    public function containsPolygon(Polygon $polygon): bool {
+        $polygonPoints = $polygon->getPoints();
+        $n = sizeof($polygonPoints);
+
+        $i = 0;
+        do {
+            $next = ($i + 1) % $n; 
+    
+            // Check if the line segment from 'p' to 'extreme' intersects 
+            // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
+            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
+            if (!$this->containsLine($lineIToNext)) {
+                return false;
+            } 
+            $i = $next; 
+        } while ($i != 0);
+        
+        return true;
     }
 }
