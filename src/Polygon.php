@@ -151,6 +151,30 @@ class Polygon implements Geometry {
     }
 
     /**
+     * Checks whether the polygon intersects another polygon
+     * @param Polygon $polygon Polygon to check
+     * @return True if the polygon intersects with the polygon, false otherwise
+     */
+    public function intersectsPolygon(Polygon $polygon) {
+        $n = sizeof($this->points);
+        $polygonPoints = $this->points;
+
+        $i = 0;
+        do {
+            $next = ($i + 1) % $n; 
+    
+            // Check if the line segment from 'p' to 'extreme' intersects 
+            // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
+            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
+            if ($polygon->intersectsLine($lineIToNext)) {
+                return true;
+            } 
+            $i = $next; 
+        } while ($i != 0); 
+        return false;
+    }
+
+    /**
      * To find orientation of ordered triplet (p, q, r). 
      * The function returns following values 
      * @param Point $p Point 1

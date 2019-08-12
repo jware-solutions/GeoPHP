@@ -77,5 +77,48 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($polygon1->pointIsWithin(new Point(5, -2)));
     }
 
-    // TODO: intersection!!
+        /**
+     * Test intersection method
+     */
+    public function testIntersects() {
+        // Polygons
+        $polygon1 = new Polygon([
+            new Point(2, 4),
+            new Point(4, 4),
+            new Point(5, 2),
+            new Point(3, 1),
+            new Point(2.5, 3),
+            new Point(2, 4)
+        ]);
+
+        $polygon2 = new Polygon([
+            new Point(-3, -4),
+            new Point(-1, -5),
+            new Point(-2, -6),
+            new Point(-3, -4)
+        ]);
+
+        $polygon3 = new Polygon([
+            new Point(4, 3),
+            new Point(6, 2.5),
+            new Point(6, 1.5),
+            new Point(4.5, 1.25),
+            new Point(4, 3)
+        ]);
+
+        $polygon4 = new Polygon([
+            new Point(-1.5, -5.5),
+            new Point(-0.5, -6.5),
+            new Point(-2, -7),
+            new Point(-1.5, -5.5),
+        ]);
+
+        // With lines is already tested in LineTest
+
+        // With Polygon
+        $this->assertTrue($polygon1->intersectsPolygon($polygon3));
+        $this->assertTrue($polygon4->intersectsPolygon($polygon2));
+        $this->assertFalse($polygon1->intersectsPolygon($polygon2));
+        $this->assertFalse($polygon3->intersectsPolygon($polygon2));
+    }
 }
