@@ -8,6 +8,18 @@ class PointTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf('\JWare\GeoPHP\Point', new Point(0, 0));
     }
 
+    /**
+     * Tests clone method
+     */
+    public function testClone() {
+        $point = new Point(3, 4);
+        $clone = $point->clone();
+        $this->assertEquals($clone->getXAndY(), $point->getXandY());
+    }
+
+    /**
+     * Tests X and Y getter
+     */
     public function testGetXandY() {
         $point = new Point(3, 4);
         $this->assertEquals([3, 4], $point->getXandY());

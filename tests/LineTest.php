@@ -13,6 +13,18 @@ class LineTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
+     * Tests clone method
+     */
+    public function testClone() {
+        $line = new Line(
+            new Point(0, 0),
+            new Point(1, 1)
+        );
+        $clone = $line->clone();
+        $this->assertEquals($clone->getPoints(), $line->getPoints());
+    }
+
+    /**
      * Tests the determinant of the line
      */
     public function testDeterminant() {

@@ -23,6 +23,14 @@ class Polygon implements Geometry {
     }
 
     /**
+     * Clone method
+     * @return Polygon New instance
+     */
+    public function clone() {
+        return new Polygon($this->points);
+    }
+
+    /**
      * Getter of the points of the polygon
      * @return Point[] Array of points that make up the polygon
      */
@@ -258,7 +266,7 @@ class Polygon implements Geometry {
             } 
             $i = $next; 
         } while ($i != 0);
-        
+
         return true;
     }
 }

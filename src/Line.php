@@ -18,6 +18,14 @@ class Line implements Geometry {
     }
 
     /**
+     * Clone method
+     * @return Line New instance
+     */
+    public function clone() {
+        return new Line($this->start, $this->end);
+    }
+
+    /**
      * Getter of the starting point of the line
      * @return Point starting point of the line
      */
@@ -94,7 +102,7 @@ class Line implements Geometry {
      * Getter for starting and ending points
      * @return float|double[] Array with the starting point (0) and the ending point (1)
      */
-    public function points() {
+    public function getPoints() {
         return [$this->start, $this->end];
     }
 
@@ -143,10 +151,10 @@ class Line implements Geometry {
 
         $d = $a1 * $b2 - $a2 * $b1;
         if (!$d) {
-            $thisPoints = $this->points();
+            $thisPoints = $this->getPoints();
             $selfStartPoint = $thisPoints[0];
             $selfEndPoint = $thisPoints[1];
-            $otherPoints = $line->points();
+            $otherPoints = $line->getPoints();
             $otherStartPoint = $otherPoints[0];
             $otherEndPoint = $otherPoints[1];
 

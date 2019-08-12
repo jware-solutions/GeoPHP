@@ -36,6 +36,21 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
+     * Tests clone method
+     */
+    public function testClone() {
+        $polygon = new Polygon([
+            new Point(0, 0),
+            new Point(4, 0),
+            new Point(4, 4),
+            new Point(0, 4),
+            new Point(0, 0),
+        ]);
+        $clone = $polygon->clone();
+        $this->assertEquals($clone->getPoints(), $polygon->getPoints());
+    }
+
+    /**
      * Test the area computation
      */
     public function testArea() {

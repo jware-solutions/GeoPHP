@@ -24,6 +24,14 @@ class Point implements Geometry {
     }
 
     /**
+     * Clone method
+     * @return Point New instance
+     */
+    public function clone() {
+        return new Point($this->x, $this->y);
+    }
+
+    /**
      * Getter of x
      * @return float|double Value of x
      */
@@ -63,7 +71,7 @@ class Point implements Geometry {
      * Getter for x and y
      * @return float|double[] Array with two values: X (0) and Y (1)
      */
-    public function getXAndY() {
+    public function getXandY() {
         return [$this->x, $this->y];
     }
 
