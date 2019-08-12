@@ -129,9 +129,9 @@ class Polygon implements Geometry {
     /**
      * Checks whether the polygon intersects a line
      * @param Line $line Line to check
-     * @return True if the polygon intersects with the line, false otherwise
+     * @return bool True if the polygon intersects with the line, false otherwise
      */
-    public function intersectsLine(Line $line) {
+    public function intersectsLine(Line $line): bool {
         $n = sizeof($this->points);
         $polygonPoints = $this->points;
 
@@ -153,9 +153,9 @@ class Polygon implements Geometry {
     /**
      * Checks whether the polygon intersects another polygon
      * @param Polygon $polygon Polygon to check
-     * @return True if the polygon intersects with the polygon, false otherwise
+     * @return bool True if the polygon intersects with the polygon, false otherwise
      */
-    public function intersectsPolygon(Polygon $polygon) {
+    public function intersectsPolygon(Polygon $polygon): bool {
         $n = sizeof($this->points);
         $polygonPoints = $this->points;
 

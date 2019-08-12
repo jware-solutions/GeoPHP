@@ -21,16 +21,16 @@ class Line implements Geometry {
      * Getter of the starting point of the line
      * @return Point starting point of the line
      */
-    public function getStart() {
+    public function getStart(): Point {
         return $this->start;
     }
 
     /**
      * Setter of the starting point of the line
      * @param Point $start starting point of the line
-     * @return Line Instance
+     * @return Line Current instance
      */
-    public function setStart(Point $start) {
+    public function setStart(Point $start): Line {
         $this->start = $start;
         return $this;
     }
@@ -39,7 +39,7 @@ class Line implements Geometry {
      * Getter of the ending point of the line
      * @return Point ending point of the line
      */
-    public function getEnd() {
+    public function getEnd(): Point {
         return $this->end;
     }
 
@@ -48,7 +48,7 @@ class Line implements Geometry {
      * @param Point $end ending point of the line
      * @return Line Instance
      */
-    public function setEnd(Point $end) {
+    public function setEnd(Point $end): Line {
         $this->end = $end;
         return $this;
     }
@@ -101,9 +101,9 @@ class Line implements Geometry {
     /**
      * Checks whether the line intersects a point
      * @param Point $point Point to check
-     * @return True if the line intersects with the point, false otherwise
+     * @return bool True if the line intersects with the point, false otherwise
      */
-    public function intersectsPoint(Point $point) {
+    public function intersectsPoint(Point $point): bool {
         $dx = $this->dx();
         $tx = ($dx != 0) ? ($point->getX() - $this->start->getX()) / $this->dx() : 0;
 
@@ -129,9 +129,9 @@ class Line implements Geometry {
     /**
      * Checks whether the line intersects another line
      * @param Line $line Line to check
-     * @return True if the line intersects with the point, false otherwise
+     * @return bool True if the line intersects with the point, false otherwise
      */
-    public function intersectsLine(Line $line) {
+    public function intersectsLine(Line $line): bool {
         // Using Cramer's Rule:
         // https://en.wikipedia.org/wiki/Intersection_%28Euclidean_geometry%29#Two_line_segments
         $a1 = $this->dx();
@@ -166,9 +166,9 @@ class Line implements Geometry {
     /**
      * Checks whether the line intersects a polygon
      * @param Polygon $polygon Polygon to check
-     * @return True if the line intersects with the polygon, false otherwise
+     * @return bool True if the line intersects with the polygon, false otherwise
      */
-    public function intersectsPolygon(Polygon $polygon) {
+    public function intersectsPolygon(Polygon $polygon): bool {
         return $polygon->intersectsLine($this);
     }
 

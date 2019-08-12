@@ -73,7 +73,7 @@ class Point implements Geometry {
      * @param Point $otherPoint The second point to compare
      * @return bool True if are equals, false otherwise
      */
-    public function isEqual(Point $otherPoint) {
+    public function isEqual(Point $otherPoint): bool {
         return $this->x === $otherPoint->getX()
             && $this->y === $otherPoint->getY();
     }
@@ -90,7 +90,7 @@ class Point implements Geometry {
      * Converts x and y components of the Point from radians to degrees
      * @return Point Point with its components in degrees
      */
-    public function fromRadiansToDegrees() {
+    public function fromRadiansToDegrees(): Point {
         return new Point(
             rad2deg($this->x),
             rad2deg($this->y)
@@ -101,7 +101,7 @@ class Point implements Geometry {
      * Converts x and y components of the Point from degrees to radians
      * @return Point Point with its components in radians
      */
-    public function fromDegreesToRadians() {
+    public function fromDegreesToRadians(): Point {
         return new Point(
             rad2deg($this->x),
             rad2deg($this->y)
@@ -137,7 +137,7 @@ class Point implements Geometry {
      * Computes the cross product of the three points
      * @param Point $point2 second point to compare
      * @param Point $point3 third point to compare
-     * @return float A positive value implies $this → #point2 → $point3 is counter-clockwise, negative implies clockwise.
+     * @return float|double A positive value implies $this → #point2 → $point3 is counter-clockwise, negative implies clockwise.
      */
     public function crossProduct(Point $point2, Point $point3) {
         return ($point2->getX() - $this->x) * ($point3->getY() - $this->y)
