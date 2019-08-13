@@ -2,13 +2,12 @@
 
 namespace JWare\GeoPHP;
 
-use \JWare\GeoPHP\Geometry;
 use \JWare\GeoPHP\Line;
 
 /**
  * Represents a single point in 2D space.
  */
-class Point implements Geometry {
+class Point {
     private $x;
     private $y;
 
@@ -165,13 +164,6 @@ class Point implements Geometry {
     }
 
     /**
-     * Abstract method implementation
-     */
-    public function area() {
-        return 0;
-    }
-
-    /**
      * Checks whether the point intersects a line
      * @param Line $line Line to check
      * @return True if the point intersects with the line, false otherwise
@@ -187,6 +179,15 @@ class Point implements Geometry {
      */
     public function intersectsPoint(Point $point): bool {
         return $this->isEqual($point);
+    }
+
+    /**
+     * Checks whether the point intersects with a polygon
+     * @param Polygon $polygon Polygon to check
+     * @return True if the point intersects with the polygon, false otherwise
+     */
+    public function intersectsPolygon(Polygon $polygon): bool {
+        return $polygon->intersectsPoint($this);
     }
 }
 

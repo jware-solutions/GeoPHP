@@ -2,13 +2,12 @@
 
 namespace JWare\GeoPHP;
 
-use \JWare\GeoPHP\Geometry;
 use \JWare\GeoPHP\Point;
 
 /**
  * Represents a line segment made up of exactly two Points.
  */
-class Line implements Geometry {
+class Line {
     private $start;
     private $end;
 
@@ -178,12 +177,5 @@ class Line implements Geometry {
      */
     public function intersectsPolygon(Polygon $polygon): bool {
         return $polygon->intersectsLine($this);
-    }
-
-    /**
-     * Abstract method implementation
-     */
-    public function area() {
-        return 0;
     }
 }

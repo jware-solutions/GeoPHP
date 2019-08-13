@@ -2,14 +2,13 @@
 
 namespace JWare\GeoPHP;
 
-use \JWare\GeoPHP\Geometry;
 use \JWare\GeoPHP\Point;
 use \JWare\GeoPHP\Line;
 
 /**
  * Represents a single point in 2D space.
  */
-class Polygon implements Geometry {
+class Polygon {
     private $points;
 
     /**
@@ -135,6 +134,32 @@ class Polygon implements Geometry {
     }
 
     /**
+     * Checks whether the polygon intersects a point
+     * @param Point $point Point to check
+     * @return bool True if the polygon intersects with the point, false otherwise
+     */
+    public function intersectsPoint(Point $point): bool {
+        $n = sizeof($this->points);
+        $polygonPoints = $this->points;
+
+        $i = 0;
+        do {
+            $next = ($i + 1) % $n; 
+    
+            // Check if the line segment from 'p' to 'extreme' intersects 
+            // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
+            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
+            echo "linea desde " . $polygonPoints[$i]->getX() . " | " . $polygonPoints[$i]->getY() . " hasta " . $polygonPoints[$next]->getX() . " | " . $polygonPoints[$next]->getY() . "\n";
+            if ($lineIToNext->intersectsPoint($point)) {
+                return true;
+            } 
+            $i = $next; 
+        } while ($i != 0);
+
+        return false;
+    }
+
+    /**
      * Checks whether the polygon intersects a line
      * @param Line $line Line to check
      * @return bool True if the polygon intersects with the line, false otherwise
@@ -154,7 +179,8 @@ class Polygon implements Geometry {
                 return true;
             } 
             $i = $next; 
-        } while ($i != 0); 
+        } while ($i != 0);
+
         return false;
     }
 
