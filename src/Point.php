@@ -121,7 +121,7 @@ class Point {
      * @param bool $inDegrees If true the result is returned in degrees. In radians otherwise
      * @return float The angle between the two points
      */
-    public function getAngle(Point $otherPoint, $inDegrees = true): float {
+    public function getAngle(Point $otherPoint, bool $inDegrees = true): float {
         // Get magnitudes
         $magnitudeThis = $this->getMagnitude();
         $magnitudeOtherPoint = $otherPoint->getMagnitude();
