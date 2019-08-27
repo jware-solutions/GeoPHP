@@ -63,45 +63,45 @@ class Line {
     /**
      * Calculates the determinant of the line:
      * line.start.x * line.end.y - line.start.y * line.end.x
-     * @return float|double The determinant of the line
+     * @return float The determinant of the line
      */
-    public function determinant() {
+    public function determinant(): float {
         return $this->start->getX() * $this->end->getY() - $this->start->getY() * $this->end->getX();
     }
 
     /**
      * Calculates the difference in 'x' components (Δx):
      * line.end.x - line.start.x
-     * @return float|double The difference in 'x' components (Δx)
+     * @return float The difference in 'x' components (Δx)
      */
-    public function dx() {
+    public function dx(): float {
         return $this->end->getX() - $this->start->getX();
     }
 
     /**
      * Calculates the difference in 'y' components (Δy):
      * line.end.y - line.start.y
-     * @return float|double The difference in 'y' components (Δy)
+     * @return float The difference in 'y' components (Δy)
      */
-    public function dy() {
+    public function dy(): float {
         return $this->end->getY() - $this->start->getY();
     }
 
     /**
      * Calculates the slope of a line:
      * line.dy() / line.dx()
-     * @return float|double The slope of a line
+     * @return float The slope of a line
      */
-    public function slope() {
+    public function slope(): float {
         $dx = $this->dx();
         return ($dx != 0) ? $this->dy() / $dx : INF;
     }
 
     /**
      * Getter for starting and ending points
-     * @return float|double[] Array with the starting point (0) and the ending point (1)
+     * @return float[] Array with the starting point (0) and the ending point (1)
      */
-    public function getPoints() {
+    public function getPoints(): array {
         return [$this->start, $this->end];
     }
 
@@ -112,24 +112,30 @@ class Line {
      */
     public function intersectsPoint(Point $point): bool {
         $dx = $this->dx();
-        $tx = ($dx != 0) ? ($point->getX() - $this->start->getX()) / $this->dx() : 0;
+        $tx = ($dx != 0) ? ($point->getX() - $this->start->getX()) / $this->dx() : null;
 
         $dy = $this->dy();
-        $ty = ($dy != 0) ? ($point->getY() - $this->start->getY()) / $this->dy() : 0;
+        $ty = ($dy != 0) ? ($point->getY() - $this->start->getY()) / $this->dy() : null;
 
-        if (!$tx && !$ty) {
+        $txIsNull = is_null($tx);
+        $tyIsNull = is_null($ty);
+
+        // If I don't have $tx nor $ty
+        if ($txIsNull && $tyIsNull) {
             return $point->isEqual($this->start);
         }
 
-        if ($tx && !$ty) {
+        // If I have $tx
+        if (!$txIsNull && $tyIsNull) {
             return $point->getY() == $this->start->getY() && 0 <= $tx && $tx <= 1;
         }
-
-        if (!$tx && $ty) {
+        
+        // If I have $ty
+        if ($txIsNull && !$tyIsNull) {
             return $point->getX() == $this->start->getX() && 0 <= $ty && $ty <= 1;
         }
 
-        // If $tx and $ty...
+        // If I have $tx and $ty...
         return abs($tx - $ty) <= 0.000001 && 0 <= $tx && $tx <= 1;
     }
 

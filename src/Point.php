@@ -13,11 +13,11 @@ class Point {
 
     /**
      * Constructor
-     * @param float|double $x Value for x
-     * @param float|double $y Value for y
+     * @param float $x Value for x
+     * @param float $y Value for y
      * @return Point New instance
      */
-    public function __construct($x, $y) {
+    public function __construct(float $x, float $y) {
         $this->x = $x;
         $this->y = $y;
     }
@@ -32,45 +32,45 @@ class Point {
 
     /**
      * Getter of x
-     * @return float|double Value of x
+     * @return float Value of x
      */
-    public function getX() {
+    public function getX(): float {
         return $this->x;
     }
 
     /**
      * Setter of x
-     * @param float|double $newX New value for x
+     * @param float $newX New value for x
      * @return Point Instance
      */
-    public function setX($newX) {
+    public function setX(float $newX) {
         $this->x = $newX;
         return $this;
     }
 
     /**
      * Getter of y
-     * @return float|double Value of y
+     * @return float Value of y
      */
-    public function getY() {
+    public function getY(): float {
         return $this->y;
     }
 
     /**
      * Setter of y
-     * @param float|double $newY New value for y
+     * @param float $newY New value for y
      * @return Point Instance
      */
-    public function setY($newY) {
+    public function setY(float $newY) {
         $this->y = $newY;
         return $this;
     }
 
     /**
      * Getter for x and y
-     * @return float|double[] Array with two values: X (0) and Y (1)
+     * @return float[] Array with two values: X (0) and Y (1)
      */
-    public function getXandY() {
+    public function getXandY(): array {
         return [$this->x, $this->y];
     }
 
@@ -87,9 +87,9 @@ class Point {
 
     /**
      * Computes the magnitude of the point's vector
-     * @return float|double Magnitude of the point's vector
+     * @return float Magnitude of the point's vector
      */
-    public function getMagnitude() {
+    public function getMagnitude(): float {
         return sqrt($this->x ** 2 + $this->y ** 2);
     }
 
@@ -119,9 +119,9 @@ class Point {
      * Computes the angle between two points
      * @param Point $otherPoint Other point to get the angle
      * @param bool $inDegrees If true the result is returned in degrees. In radians otherwise
-     * @return float|double The angle between the two points
+     * @return float The angle between the two points
      */
-    public function getAngle(Point $otherPoint, $inDegrees = true) {
+    public function getAngle(Point $otherPoint, $inDegrees = true): float {
         // Get magnitudes
         $magnitudeThis = $this->getMagnitude();
         $magnitudeOtherPoint = $otherPoint->getMagnitude();
@@ -134,9 +134,9 @@ class Point {
     /**
      * Computes the dot product of the two points
      * @param Point $otherPoint Other point to compute the dot product
-     * @return float|double Dot product = x1 * x2 + y1 * y2
+     * @return float Dot product = x1 * x2 + y1 * y2
      */
-    public function dotProduct(Point $otherPoint) {
+    public function dotProduct(Point $otherPoint): float {
         return $this->x * $otherPoint->getX() + $this->y * $otherPoint->getY();
     }
 
@@ -144,9 +144,9 @@ class Point {
      * Computes the cross product of the three points
      * @param Point $point2 second point to compare
      * @param Point $point3 third point to compare
-     * @return float|double A positive value implies $this → #point2 → $point3 is counter-clockwise, negative implies clockwise.
+     * @return float A positive value implies $this → #point2 → $point3 is counter-clockwise, negative implies clockwise.
      */
-    public function crossProduct(Point $point2, Point $point3) {
+    public function crossProduct(Point $point2, Point $point3): float {
         return ($point2->getX() - $this->x) * ($point3->getY() - $this->y)
             - ($point2->getY() - $this->y) * ($point3->getX() - $this->x);
     }
@@ -154,9 +154,9 @@ class Point {
     /**
      * Computes the euclidean distance between two points
      * @param Point $otherPoint Other point to compute the euclidean distance
-     * @return float|double Euclidean distance between the two points
+     * @return float Euclidean distance between the two points
      */
-    public function euclideanDistance(Point $otherPoint) {
+    public function euclideanDistance(Point $otherPoint): float {
         return sqrt(
             (($otherPoint->getX() - $this->x) ** 2)
             + (($otherPoint->getY() - $this->y) ** 2)

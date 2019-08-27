@@ -2,6 +2,7 @@
 
 use \JWare\GeoPHP\Point;
 use \JWare\GeoPHP\Line;
+use \JWare\GeoPHP\Polygon;
 
 class PointTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfPoint() {
@@ -107,7 +108,7 @@ class PointTest extends \PHPUnit\Framework\TestCase {
      * dot = x1 * x2 + y1 * y2
      */
     public function testDotProduct() {
-        $point1 = new Point(2.0, 4.5);
+        $point1 = new Point(2, 4.5);
         $dot = $point1->dotProduct(new Point(1.5, 0.5));
         $this->assertEquals(5.25, $dot);
     }
@@ -121,7 +122,7 @@ class PointTest extends \PHPUnit\Framework\TestCase {
         $pointC = new Point(7, 12);
 
         $cross = $pointA->crossProduct($pointB, $pointC);
-        $this->assertEquals(2.0, $cross);
+        $this->assertEquals(2, $cross);
     }
 
     /**
@@ -139,15 +140,27 @@ class PointTest extends \PHPUnit\Framework\TestCase {
      * Test intersection method
      */
     public function testIntersects() {
+        // Lines
         $line1 = new Line(
             new Point(1, 1),
             new Point(5, 5)
         );
 
+        // Points
         $point1 = new Point(3, 3);
         $point2 = new Point(3, 3);
         $point3 = new Point(3, 4);
         $point4 = new Point(5, 5);
+
+        // Polygons
+        $polygon = new Polygon([
+            new Point(1, 1),
+            new Point(3, 3),
+            new Point(2, 7),
+            new Point(4, 5),
+            new Point(7, 5),
+            new Point(1, 1)
+        ]);
 
         // With Point
         $this->assertTrue($point1->intersectsPoint($point2));
@@ -158,6 +171,11 @@ class PointTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($point1->intersectsLine($line1));
         $this->assertTrue($point4->intersectsLine($line1)); // Extreme
         $this->assertFalse($point3->intersectsLine($line1));
+
+        // With Polygon
+        // $this->assertTrue($point1->intersectsPolygon($polygon));
+        // $this->assertTrue($point4->intersectsPolygon($polygon));
+        $this->assertFalse($point3->intersectsPolygon($polygon));
     }
 }
 

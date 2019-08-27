@@ -149,7 +149,6 @@ class Polygon {
             // Check if the line segment from 'p' to 'extreme' intersects 
             // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
             $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
-            echo "linea desde " . $polygonPoints[$i]->getX() . " | " . $polygonPoints[$i]->getY() . " hasta " . $polygonPoints[$next]->getX() . " | " . $polygonPoints[$next]->getY() . "\n";
             if ($lineIToNext->intersectsPoint($point)) {
                 return true;
             } 
