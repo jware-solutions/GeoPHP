@@ -61,7 +61,7 @@ class Line {
     }
 
     /**
-     * Calculates the determinant of the line:
+     * Computes the determinant of the line:
      * line.start.x * line.end.y - line.start.y * line.end.x
      * @return float The determinant of the line
      */
@@ -70,7 +70,7 @@ class Line {
     }
 
     /**
-     * Calculates the difference in 'x' components (Δx):
+     * Computes the difference in 'x' components (Δx):
      * line.end.x - line.start.x
      * @return float The difference in 'x' components (Δx)
      */
@@ -79,7 +79,7 @@ class Line {
     }
 
     /**
-     * Calculates the difference in 'y' components (Δy):
+     * Computes the difference in 'y' components (Δy):
      * line.end.y - line.start.y
      * @return float The difference in 'y' components (Δy)
      */
@@ -88,7 +88,7 @@ class Line {
     }
 
     /**
-     * Calculates the slope of a line:
+     * Computes the slope of a line:
      * line.dy() / line.dx()
      * @return float The slope of a line
      */
