@@ -6,7 +6,7 @@
 
 Install the library running:
 
-`composer install jware/geophp`
+`composer require jware/geophp`
 
 ## Usage
 
@@ -45,5 +45,5 @@ GeoPHP was born due to the lack of a modern geospatial library for PHP. The tool
 
 First of all, thanks for consider contributing to the project! Please, read [CONTRIBUTING.md](/CONTRIBUTING.md) for more.
 
-<!-- TODO: change for real documentation URL -->
+<!-- TODO: change for real documentation UI URL -->
 [documentation_site]: https://any.com "Full documentation"
