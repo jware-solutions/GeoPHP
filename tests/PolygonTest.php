@@ -223,6 +223,10 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
             new Point(-1.5, -5.5),
         ]);
 
+        // With Point
+        $this->assertTrue($polygon1->intersectsPoint(new Point(3, 4)));
+        $this->assertFalse($polygon1->intersectsPoint(new Point(5, 4)));
+
         // With lines is already tested in LineTest
 
         // With Polygon
