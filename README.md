@@ -43,8 +43,7 @@ GeoPHP was born due to the lack of a modern geospatial library for PHP. The tool
 
 ## Contributing
 
-First of all, thanks for consider contributing to the project! Please, read [CONTRIBUTING.md](contributing_md) for more.
+First of all, thanks for consider contributing to the project! Please, read [CONTRIBUTING.md](/CONTRIBUTING.md) for more.
 
 <!-- TODO: change for real documentation URL -->
 [documentation_site]: https://any.com "Full documentation"
-[contributing_md]: /CONTRIBUTING.md
