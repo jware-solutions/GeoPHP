@@ -105,11 +105,11 @@ class Polygon {
     }
 
     /**
-     * Abstract method implementation
+     * Get the Polygon's area
      * Uses the Shoelace Formula:
      * https://en.wikipedia.org/wiki/Shoelace_formula
      */
-    public function area() {
+    public function area(): float {
         // Initialze area 
         $area = 0.0;
 
@@ -131,7 +131,8 @@ class Polygon {
     }
 
     /**
-     * Checks whether the polygon intersects a point
+     * Checks whether the polygon intersects a point. A Polygon intersects a Point if
+     * at least one of its lines intersects the Point
      * @param Point $point Point to check
      * @return bool True if the polygon intersects with the point, false otherwise
      */
