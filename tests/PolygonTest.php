@@ -21,7 +21,7 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
             $somePoint
         ]));
 
-        // Checks invalid Polygon
+        // Checks invalid Polygons
         // Has only 2 different points
         $this->expectException(NotEnoughPointsException::class);
         $invalidPolygon2 = new Polygon([

@@ -223,7 +223,7 @@ class Polygon {
     }
 
     /**
-     * Checks if a point is inside a polygon
+     * Checks whether a point is inside a polygon
      * @param Point $point Point to check
      * @return bool True if the point is inside the polygon, false otherwise
      */
@@ -261,7 +261,7 @@ class Polygon {
     }
 
     /**
-     * Checks if the polygon contains a line
+     * Checks whether the polygon contains a line
      * @param Line $line Line to check
      * @return bool True if the line is inside the polygon, false otherwise
      */
@@ -272,7 +272,7 @@ class Polygon {
     }
 
     /**
-     * Checks if the polygon contains another polygon
+     * Checks whether the polygon contains another polygon
      * @param Polygon $polygon Polygon to check
      * @return bool True if the Polygon is inside the polygon, false otherwise
      */
