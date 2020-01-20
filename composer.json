@@ -6,11 +6,9 @@
     "version": "1.0.0",
     "authors": [
         {
-            "name": "JWare",
-            "email": "genarocamele@gmail.com"
+            "name": "JWare"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": "^7"
     },
