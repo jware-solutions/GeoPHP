@@ -89,8 +89,7 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
             new Point(-81, 41)
         ]);
         $centroid = $polygon->getCentroid();
-        $this->assertEquals(-81.833333333, round($centroid->getX(), $precision=9));
-        $this->assertEquals(36.833333333, round($centroid->getY(), $precision=9));
+        $this->assertEquals(new Point(-82, 36), $centroid);
     }
 
     /**

@@ -75,12 +75,15 @@ class Polygon {
     public function getCentroid(): Point {
         $x = 0.0;
         $y = 0.0;
-        foreach ($this->points as $point) {
+        $pointsCount = 0;
+        $elemCount = count($this->points);
+        // We don't need the last element
+        for ($pointsCount; $pointsCount  < $elemCount - 1; $pointsCount++) {
+            $point = $this->points[$pointsCount];
             $x += $point->getX();
             $y += $point->getY();
         }
 
-        $pointsCount = count($this->points);
         return new Point(
             $x / $pointsCount,
             $y / $pointsCount
