@@ -72,7 +72,7 @@ class Polygon {
      * Computes the polygon's centroid
      * @return Point Polygon's centroid point
      */
-    private function findCentroid(): Point {
+    public function getCentroid(): Point {
         $x = 0.0;
         $y = 0.0;
         foreach ($this->points as $point) {
@@ -93,7 +93,7 @@ class Polygon {
      */
     private function getSortedVerticies(): array {
         // Gets polygon centroid
-        $center = $this->findCentroid();
+        $center = $this->getCentroid();
         $subArray = array_slice($this->points, 0, count($this->points) - 1);
         usort($subArray, function($point1, $point2) use ($center) {
             $a1 = (rad2deg(atan2($point1->getX() - $center->getX(), $point1->getY() - $center->getY())) + 360) % 360;

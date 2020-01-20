@@ -77,6 +77,23 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
+     * Tests getCentroid method
+     */
+    public function testGetCentroid() {
+        $polygon = new Polygon([
+            new Point(-81, 41),
+            new Point(-88, 36),
+            new Point(-84, 31),
+            new Point(-80, 33),
+            new Point(-77, 39),
+            new Point(-81, 41)
+        ]);
+        $centroid = $polygon->getCentroid();
+        $this->assertEquals(-81.833333333, round($centroid->getX(), $precision=9));
+        $this->assertEquals(36.833333333, round($centroid->getY(), $precision=9));
+    }
+
+    /**
      * Test the area computation
      */
     public function testArea() {
