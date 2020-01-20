@@ -1,11 +1,12 @@
 {
     "name": "jware/geophp",
-    "description": "A little geo spacal library for PHP based on Geo Rust and Turf.js",
+    "description": "A little geo spatial library for PHP based on Geo Rust and Turf.js",
     "type": "library",
     "license": "MIT",
+    "version": "1.0.0",
     "authors": [
         {
-            "name": "Genaro Camele",
+            "name": "JWare",
             "email": "genarocamele@gmail.com"
         }
     ],
