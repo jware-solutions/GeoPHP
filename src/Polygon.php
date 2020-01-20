@@ -44,6 +44,10 @@ class Polygon {
      * @return Polygon Current instance
      */
     public function setPoint(int $idx, Point $point): Polygon {
+        if ($idx == 0 || $idx == count($this->getPoints())) {
+            throw new \Exception("First or last Point cannot be changed, you should create a new Polygon", 1);
+        }
+        
         $this->points[$idx] = $point;
         return $this;
     }

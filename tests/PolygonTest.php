@@ -51,6 +51,28 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
+     * Tests setPoint method
+     */
+    public function testSetPoint() {
+        $polygon = new Polygon([
+            new Point(0, 0),
+            new Point(4, 0),
+            new Point(4, 4),
+            new Point(0, 4),
+            new Point(0, 0),
+        ]);
+        $newPoint = new Point(4, 1);
+        $polygon->setPoint(1, $newPoint);
+        $this->assertEquals($polygon->getPoints()[1], $newPoint);
+
+        // Checks invalid Polygon's point setting: It's not allowed to set
+        // the first or last Point. You must create a new Polygon
+        $this->expectException(\Exception::class);
+        $polygon->setPoint(0, $newPoint);
+        $polygon->setPoint(4, $newPoint);
+    }
+
+    /**
      * Test the area computation
      */
     public function testArea() {
