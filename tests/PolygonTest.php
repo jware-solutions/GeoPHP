@@ -3,6 +3,8 @@
 use \JWare\GeoPHP\Polygon;
 use \JWare\GeoPHP\Point;
 use \JWare\GeoPHP\Line;
+use \JWare\GeoPHP\Exceptions\FirstAndLastPointNotEqualException;
+use \JWare\GeoPHP\Exceptions\SettingPointException;
 
 class PolygonTest extends \PHPUnit\Framework\TestCase {
 	public function testInstantiationOfPolygon() {
@@ -19,7 +21,7 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
         ]));
 
         // Checks invalid Polygon
-        $this->expectException(\Exception::class);
+        $this->expectException(FirstAndLastPointNotEqualException::class);
         $invalidPolygon = new Polygon([
             new Point(0, 1),
             new Point(3, 1),
@@ -67,7 +69,7 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
 
         // Checks invalid Polygon's point setting: It's not allowed to set
         // the first or last Point. You must create a new Polygon
-        $this->expectException(\Exception::class);
+        $this->expectException(SettingPointException::class);
         $polygon->setPoint(0, $newPoint);
         $polygon->setPoint(4, $newPoint);
     }

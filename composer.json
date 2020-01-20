@@ -1,12 +1,12 @@
 {
     "name": "jware/geophp",
-    "description": "A little geo spacal library for PHP based on Geo Rust",
+    "description": "A little geo spacal library for PHP based on Geo Rust and Turf.js",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Genaro Camele",
-            "email": "genarocamele@hotmail.com"
+            "email": "genarocamele@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -16,7 +16,8 @@
     },
     "autoload": {
         "psr-4": {
-            "JWare\\GeoPHP\\": "src/"
+            "JWare\\GeoPHP\\": "src/",
+            "JWare\\GeoPHP\\Exceptions\\": "src/exceptions/"
         }
     }
 }

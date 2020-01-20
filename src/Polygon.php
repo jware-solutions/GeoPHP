@@ -4,6 +4,8 @@ namespace JWare\GeoPHP;
 
 use \JWare\GeoPHP\Point;
 use \JWare\GeoPHP\Line;
+use \JWare\GeoPHP\Exceptions\FirstAndLastPointNotEqualException;
+use \JWare\GeoPHP\Exceptions\SettingPointException;
 
 /**
  * Represents a single point in 2D space.
@@ -45,9 +47,9 @@ class Polygon {
      */
     public function setPoint(int $idx, Point $point): Polygon {
         if ($idx == 0 || $idx == count($this->getPoints())) {
-            throw new \Exception("First or last Point cannot be changed, you should create a new Polygon", 1);
+            throw new SettingPointException("First or last Point cannot be changed, you should create a new Polygon", 1);
         }
-        
+
         $this->points[$idx] = $point;
         return $this;
     }
@@ -62,13 +64,13 @@ class Polygon {
         $pointsCount = count($points);
         // '< 4' because the last point has to be the same as first point
         if ($pointsCount < 4) { 
-            throw new \Exception("The polygon has to have at least three diferent points", 1);
+            throw new FirstAndLastPointNotEqualException("The polygon has to have at least three diferent points", 1);
         }
 
         // Checks first/last equality
         $lastPosition = $pointsCount - 1;
         if (!$points[0]->isEqual($points[$lastPosition])) {
-            throw new \Exception("First and last point must have the same values", 1);
+            throw new FirstAndLastPointNotEqualException("First and last point must have the same values", 1);
         }
 
         $this->points = $points;
