@@ -4,6 +4,7 @@ namespace JWare\GeoPHP;
 
 use \JWare\GeoPHP\Point;
 use \JWare\GeoPHP\Line;
+use \JWare\GeoPHP\Exceptions\NotEnoughPointsException;
 use \JWare\GeoPHP\Exceptions\FirstAndLastPointNotEqualException;
 use \JWare\GeoPHP\Exceptions\SettingPointException;
 
@@ -19,8 +20,21 @@ class Polygon {
      * @return Polygon New instance
      */
     public function __construct(array $points) {
-        // First and last point must have the same values
-        $this->setPoints($points);
+        // A polygon has at least three points
+        $pointsCount = count($points);
+        // '< 4' because the last point has to be the same as first point
+        if ($pointsCount < 4) { 
+            throw new NotEnoughPointsException("The polygon has to have at least three diferent points", 1);
+        }
+
+        // Checks first/last equality
+        $lastPosition = $pointsCount - 1;
+        if (!$points[0]->isEqual($points[$lastPosition])) {
+            throw new FirstAndLastPointNotEqualException("First and last point must have the same values", 1);
+        }
+
+        $this->points = $points;
+        return $this;
     }
 
     /**
@@ -51,29 +65,6 @@ class Polygon {
         }
 
         $this->points[$idx] = $point;
-        return $this;
-    }
-
-    /**
-     * Setter for all the points of the polygon
-     * @param Point[] $points Array of points that make up the polygon
-     * @return Polygon Current instance
-     */
-    public function setPoints(array $points): Polygon {
-        // A polygon has at least three points
-        $pointsCount = count($points);
-        // '< 4' because the last point has to be the same as first point
-        if ($pointsCount < 4) { 
-            throw new FirstAndLastPointNotEqualException("The polygon has to have at least three diferent points", 1);
-        }
-
-        // Checks first/last equality
-        $lastPosition = $pointsCount - 1;
-        if (!$points[0]->isEqual($points[$lastPosition])) {
-            throw new FirstAndLastPointNotEqualException("First and last point must have the same values", 1);
-        }
-
-        $this->points = $points;
         return $this;
     }
 

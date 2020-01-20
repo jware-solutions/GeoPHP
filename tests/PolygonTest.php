@@ -3,6 +3,7 @@
 use \JWare\GeoPHP\Polygon;
 use \JWare\GeoPHP\Point;
 use \JWare\GeoPHP\Line;
+use \JWare\GeoPHP\Exceptions\NotEnoughPointsException;
 use \JWare\GeoPHP\Exceptions\FirstAndLastPointNotEqualException;
 use \JWare\GeoPHP\Exceptions\SettingPointException;
 
@@ -21,19 +22,20 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
         ]));
 
         // Checks invalid Polygon
+        // Has only 2 different points
+        $this->expectException(NotEnoughPointsException::class);
+        $invalidPolygon2 = new Polygon([
+            new Point(0, 1),
+            new Point(3, 1),
+            new Point(1, 1) 
+        ]);
+
         $this->expectException(FirstAndLastPointNotEqualException::class);
         $invalidPolygon = new Polygon([
             new Point(0, 1),
             new Point(3, 1),
             new Point(4, 2),
             new Point(1, 1) // Not equals to first point
-        ]);
-
-        // Has only 2 different points
-        $invalidPolygon2 = new Polygon([
-            new Point(0, 1),
-            new Point(3, 1),
-            new Point(1, 1) 
         ]);
     }
 
