@@ -1,6 +1,6 @@
 # GeoPHP
 
-[GeoPHP][documentation_site] is a library of geospatial functions based on GeoRust and Turf.js.
+GeoPHP is a library of geospatial functions based on GeoRust and Turf.js.
 
 ## Installation
 
