@@ -60,12 +60,12 @@ class Polygon {
      */
     private function getLines() {
 		$n = sizeof($this->points);
-        $linePoints = $this->points;
+        $polygonPoints = $this->points;
 		$i = 0;
         do {
             $next = ($i + 1) % $n; 
             // Generates Line and yield it
-            $lineIToNext = new Line($linePoints[$i], $linePoints[$next]);
+            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
             yield $lineIToNext; 
             $i = $next; 
         } while ($i != 0); 
