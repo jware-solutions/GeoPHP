@@ -233,5 +233,7 @@ class PolygonTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($polygon4->intersectsPolygon($polygon2));
         $this->assertFalse($polygon1->intersectsPolygon($polygon2));
         $this->assertFalse($polygon3->intersectsPolygon($polygon2));
+
+        // With LineString is already tested in LineStringTest
     }
 }

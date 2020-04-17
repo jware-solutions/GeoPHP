@@ -176,6 +176,8 @@ class PointTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($point1->intersectsPolygon($polygon));
         $this->assertTrue($point4->intersectsPolygon($polygon));
         $this->assertFalse($point3->intersectsPolygon($polygon));
+        
+        // With LineString is already tested in LineStringTest
     }
 }
 
