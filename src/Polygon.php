@@ -54,6 +54,24 @@ class Polygon {
     }
 
     /**
+     * Generates an iterator of the Polygon lines formed by
+     * all its Points
+     * @return Iterator Iterator of the line
+     */
+    private function getLines() {
+		$n = sizeof($this->points);
+        $linePoints = $this->points;
+		$i = 0;
+        do {
+            $next = ($i + 1) % $n; 
+            // Generates Line and yield it
+            $lineIToNext = new Line($linePoints[$i], $linePoints[$next]);
+            yield $lineIToNext; 
+            $i = $next; 
+        } while ($i != 0); 
+	}
+
+    /**
      * Setter for one point of the polygon
      * @param int $idx Index in the array of the polygon to replace
      * @param Point $point Point to put in the specified position
@@ -140,46 +158,28 @@ class Polygon {
      * @return bool True if the polygon intersects with the point, false otherwise
      */
     public function intersectsPoint(Point $point): bool {
-        $n = sizeof($this->points);
-        $polygonPoints = $this->points;
-
-        $i = 0;
-        do {
-            $next = ($i + 1) % $n; 
-    
-            // Check if the line segment from 'p' to 'extreme' intersects 
-            // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
-            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
-            if ($lineIToNext->intersectsPoint($point)) {
+        $lines = $this->getLines();
+        foreach ($lines as $line) {
+            if ($line->intersectsPoint($point)) {
                 return true;
-            } 
-            $i = $next; 
-        } while ($i != 0);
+            }
+        }
 
         return false;
     }
 
     /**
      * Checks whether the polygon intersects a line
-     * @param Line $line Line to check
+     * @param Line $otherLine Line to check
      * @return bool True if the polygon intersects with the line, false otherwise
      */
-    public function intersectsLine(Line $line): bool {
-        $n = sizeof($this->points);
-        $polygonPoints = $this->points;
-
-        $i = 0;
-        do {
-            $next = ($i + 1) % $n; 
-    
-            // Check if the line segment from 'p' to 'extreme' intersects 
-            // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
-            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
-            if ($line->intersectsLine($lineIToNext)) {
+    public function intersectsLine(Line $otherLine): bool {
+        $lines = $this->getLines();
+        foreach ($lines as $line) {
+            if ($line->intersectsLine($otherLine)) {
                 return true;
             } 
-            $i = $next; 
-        } while ($i != 0);
+        }
 
         return false;
     }
@@ -190,21 +190,13 @@ class Polygon {
      * @return bool True if the polygon intersects with the polygon, false otherwise
      */
     public function intersectsPolygon(Polygon $polygon): bool {
-        $n = sizeof($this->points);
-        $polygonPoints = $this->points;
-
-        $i = 0;
-        do {
-            $next = ($i + 1) % $n; 
-    
-            // Check if the line segment from 'p' to 'extreme' intersects 
-            // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
-            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
-            if ($polygon->intersectsLine($lineIToNext)) {
+        $lines = $this->getLines();
+        foreach ($lines as $line) {
+            if ($polygon->intersectsLine($line)) {
                 return true;
             } 
-            $i = $next; 
-        } while ($i != 0); 
+        }
+
         return false;
     }
 
@@ -273,25 +265,16 @@ class Polygon {
 
     /**
      * Checks whether the polygon contains another polygon
-     * @param Polygon $polygon Polygon to check
+     * @param Polygon $otherPolygon Polygon to check
      * @return bool True if the Polygon is inside the polygon, false otherwise
      */
-    public function containsPolygon(Polygon $polygon): bool {
-        $polygonPoints = $polygon->getPoints();
-        $n = sizeof($polygonPoints);
-
-        $i = 0;
-        do {
-            $next = ($i + 1) % $n; 
-    
-            // Check if the line segment from 'p' to 'extreme' intersects 
-            // with the line segment from 'polygonPoints[i]' to 'polygonPoints[next]' 
-            $lineIToNext = new Line($polygonPoints[$i], $polygonPoints[$next]);
-            if (!$this->containsLine($lineIToNext)) {
+    public function containsPolygon(Polygon $otherPolygon): bool {
+        $otherPolygonLines = $otherPolygon->getLines();
+        foreach ($otherPolygonLines as $line) {
+            if (!$this->containsLine($line)) {
                 return false;
             } 
-            $i = $next; 
-        } while ($i != 0);
+        }
 
         return true;
     }
