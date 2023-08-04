@@ -2,9 +2,12 @@
 
 namespace JWare\GeoPHP\Exceptions;
 
-class SettingPointException extends \Exception {
+public $message;
+
+class SettingPointException extends \Throwable {
     public function __construct($message, $code = 0, Exception $previous = null) {
-        parent::__construct($message, $code, $previous);
+        $this->message = $message;
+        $this->__construct($message, $code, $previous);
     }
 }
 
